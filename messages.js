@@ -13,17 +13,17 @@ var QuickifyMessages = {
 var QuickifyUrl = 'https://open.spotify.com/*';
 
 var QuickifySendToContent = function(msg) {
-  chrome.tabs.query({url: QuickifyUrl},
+  browser.tabs.query({url: QuickifyUrl},
       function(tabs) {
         // Open a spotify tab if one does not exist yet.
         if (tabs.length === 0) {
-          chrome.tabs.create({url: 'https://open.spotify.com'},
+          browser.tabs.create({url: 'https://open.spotify.com'},
             function onCreated(tab) {
-              chrome.tabs.sendMessage(tab.id, msg);
+              browser.tabs.sendMessage(tab.id, msg);
             });
         }
         for (var i = 0; i < tabs.length; i++) {
-          chrome.tabs.sendMessage(tabs[i].id, msg);
+          browser.tabs.sendMessage(tabs[i].id, msg);
         };
       });
 };

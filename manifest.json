@@ -25,35 +25,13 @@
     "persistent": false,
     "scripts": ["messages.js", "background.js"]
   },
-  "commands": {
-    "play-pause": {
-      "suggested_key": "MediaPlayPause",
-      "description": "Play/Pause current song"
-    },
-    "next": {
-      "description": "Next track",
-      "suggested_key": "MediaNextTrack"
-    },
-    "previous": {
-      "description": "Previous track",
-      "suggested_key": "MediaPrevTrack"
-    },
-    "shuffle": {
-      "description": "Shuffle"
-    },
-    "repeat": {
-      "description": "Repeat"
-    },
-    "track-add": {
-      "description": "Save/Unsave track"
-    }
-  },
   "content_scripts": [
     {
       "matches": ["https://open.spotify.com/*"],
       "js": ["messages.js", "quickify_content.js"]
     }
   ],
+
   "permissions": [
     "tabs",
     "https://open.spotify.com/*"

@@ -80,16 +80,16 @@ QuickifyPopup.init = function() {
     QuickifySendToContent(QuickifyMessages.REPEAT);
   });
   QuickifyPopup.openLinkBtn.addEventListener('click', function() {
-    chrome.tabs.query({url: QuickifyUrl},
+    browser.tabs.query({url: QuickifyUrl},
       function(tabs) {
         if (tabs.length) {
-          chrome.tabs.update(tabs[0].id, {active: true});
+          browser.tabs.update(tabs[0].id, {active: true});
         }
       });
   });
 
   // Set up update listener.
-  chrome.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
+  browser.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
 
   // Notify content we have started.
   QuickifySendToContent(QuickifyMessages.POPUP_ON);

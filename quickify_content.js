@@ -64,7 +64,7 @@ Quickify.broadcast = function() {
   statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
   statusMsg.isRepeated = repeatButton.classList.contains("control-button--active");
 
-  chrome.runtime.sendMessage(statusMsg);
+  browser.runtime.sendMessage(statusMsg);
 };
 
 
@@ -78,9 +78,7 @@ Quickify.resetAge = function() {
 
 
 Quickify.playOrPause = function() {
-  var playButton = document.querySelector("button.control-button[class*='spoticon-play']")
-  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']")
-  (playButton || pauseButton).click()
+  (document.querySelector("button.control-button[class*='spoticon-play']") || document.querySelector("button.control-button[class*='spoticon-pause']")).click()
 };
 
 
@@ -95,9 +93,7 @@ Quickify.previous = function() {
 
 
 Quickify.save = function() {
-  var addButton = document.querySelector("button.control-button[class*='spoticon-add']")
-  var addedButton = document.querySelector("button.control-button[class*='spoticon-added']")
-  (addButton || addedButton).click();
+  (document.querySelector("button.control-button[class*='spoticon-add']") || document.querySelector("button.control-button[class*='spoticon-added']")).click();
 };
 
 
@@ -113,7 +109,7 @@ Quickify.shuffle  = function() {
 
 Quickify.init = function() {
   // Setup listeners.
-  chrome.runtime.onMessage.addListener(
+  browser.runtime.onMessage.addListener(
       function(request, sender, sendResponse) {
         switch (request) {
           case QuickifyMessages.POPUP_ON:
