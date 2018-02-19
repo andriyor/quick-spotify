@@ -42,29 +42,27 @@ Quickify.broadcast = function() {
   var statusMsg = {};
   statusMsg.type = QuickifyMessages.STATUS;
 
-  var trackNameDiv = Quickify.getById('track-name') ||
-    Quickify.getBetaInfoByClass('track');
-  var trackArtistDiv = Quickify.getById('track-artist');
-    Quickify.getBetaInfoByClass('artist');
-  var trackLengthDiv = Quickify.getById('track-length');
-  var trackCurrentDiv = Quickify.getById('track-current') ||
-    Quickify.getById('elapsed');
-  var trackRemainingDiv = Quickify.getById('remaining');
-  var trackAddDiv = Quickify.getById('track-add');
-  var playPauseDiv = Quickify.getById('play-pause') ||
-    Quickify.getById('play');
-  var shuffleDiv = Quickify.getById('shuffle');
-  var repeatDiv = Quickify.getById('repeat');
+  var trackName = document.querySelector('.track-info .track-info__name a');
+  var trackArtist = document.querySelector('.track-info .track-info__artists a');
 
-  statusMsg.song = trackNameDiv.textContent;
-  statusMsg.artist = trackArtistDiv.textContent;
-  statusMsg.songLength = trackLengthDiv && trackLengthDiv.textContent;
-  statusMsg.remainingTime = trackRemainingDiv && trackRemainingDiv.textContent;
+  var trackCurrentDiv = document.querySelector(".playback-bar__progress-time");
+  var trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];  
+
+  var shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
+  var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
+  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']")
+  var addedButton = document.querySelector("button.control-button[class*='spoticon-added']")
+
+  statusMsg.song = trackName.textContent;
+  statusMsg.artist = trackArtist.textContent;
+
+  statusMsg.songLength = trackLengthDiv.textContent;
   statusMsg.currentTime = trackCurrentDiv.textContent;
-  statusMsg.isPlaying = playPauseDiv.classList.contains('playing');
-  statusMsg.isShuffled = shuffleDiv.classList.contains('active');
-  statusMsg.isRepeated = repeatDiv.classList.contains('active');
-  statusMsg.isSaved = trackAddDiv.classList.contains('added');
+
+  statusMsg.isPlaying = pauseButton ? true : false;
+  statusMsg.isSaved = addedButton ? true : false;
+  statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
+  statusMsg.isRepeated = repeatButton.classList.contains("control-button--active");
 
   chrome.runtime.sendMessage(statusMsg);
 };
@@ -79,61 +77,37 @@ Quickify.resetAge = function() {
 };
 
 
-Quickify.getBetaInfoByClass = function(c) {
-  var appPlaya = document.getElementById('main');
-  var elt = appPlaya && appPlaya.contentDocument &&
-    appPlaya.contentDocument.querySelector('#view-now-playing .' + c + ' a');
-  return elt; 
-};
-
-
-Quickify.getById = function(id) {
-  var appPlaya = document.getElementById('app-player');
-  var elt = appPlaya && appPlaya.contentDocument.getElementById(id);
-  if (!elt) {
-    var appPlayaBeta = document.getElementById('main');
-    elt = appPlayaBeta && appPlayaBeta.contentDocument &&
-      appPlayaBeta.contentDocument.getElementById(id);
-  }
-  return elt; 
-};
-
-
 Quickify.playOrPause = function() {
-  Quickify.log('play or pause');
-  var playPauseDiv = Quickify.getById('play-pause') ||
-    Quickify.getById('play');
-  playPauseDiv.click();
+  var playButton = document.querySelector("button.control-button[class*='spoticon-play']")
+  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']")
+  (playButton || pauseButton).click()
 };
 
 
 Quickify.next = function() {
-  Quickify.log('next');
-  Quickify.getById('next').click();
+  document.querySelector("button.control-button[class*='spoticon-skip-forward']").click();
 };
 
 
 Quickify.previous = function() {
-  Quickify.log('previous');
-  Quickify.getById('previous').click();
+  document.querySelector("button.control-button[class*='spoticon-skip-back']").click();
 };
 
 
 Quickify.save = function() {
-  Quickify.log('save');
-  Quickify.getById('track-add').click();
+  var addButton = document.querySelector("button.control-button[class*='spoticon-add']")
+  var addedButton = document.querySelector("button.control-button[class*='spoticon-added']")
+  (addButton || addedButton).click();
 };
 
 
 Quickify.repeat = function() {
-  Quickify.log('repeat');
-  Quickify.getById('repeat').click();
+  document.querySelector("button.control-button[class*='spoticon-repeat']").click();
 };
 
 
 Quickify.shuffle  = function() {
-  Quickify.log('shuffle');
-  Quickify.getById('shuffle').click();
+  document.querySelector("button.control-button[class*='spoticon-shuffle']").click();
 };
 
 

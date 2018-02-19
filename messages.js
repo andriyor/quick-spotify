@@ -10,17 +10,14 @@ var QuickifyMessages = {
   STATUS: 'q status'
 };
 
-var QuickifyUrl = [
-    'https://play.spotify.com/*',
-    'https://player.spotify.com/*'
-    ];
+var QuickifyUrl = 'https://open.spotify.com/*';
 
 var QuickifySendToContent = function(msg) {
   chrome.tabs.query({url: QuickifyUrl},
       function(tabs) {
         // Open a spotify tab if one does not exist yet.
         if (tabs.length === 0) {
-          chrome.tabs.create({url: 'https://play.spotify.com'},
+          chrome.tabs.create({url: 'https://open.spotify.com'},
             function onCreated(tab) {
               chrome.tabs.sendMessage(tab.id, msg);
             });
