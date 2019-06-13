@@ -66,7 +66,7 @@ QuickifyPopup.init = function() {
   QuickifyPopup.artCover = document.getElementById('artCover');
   QuickifyPopup.volumeBar = document.getElementById('volume');
   QuickifyPopup.volumeProgress = document.getElementById('volume-progress');
-  
+  QuickifyPopup.volumeKnob = document.getElementById("volume-knob");
 
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
@@ -102,6 +102,14 @@ QuickifyPopup.init = function() {
     var height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
     volume = (bottom - event.clientY) / height;
     QuickifySendToContent({'command' : QuickifyMessages.CHANGE_VOLUME, 'volume' : volume});
+  });
+
+  QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
+    QuickifyPopup.volumeKnob.style.visibility = 'visible';  
+  });
+
+  QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
+    QuickifyPopup.volumeKnob.style.visibility = 'hidden';  
   });
 
   // Set up update listener.

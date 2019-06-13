@@ -74,12 +74,23 @@
       #volume {
         margin-top: auto;
         position : absolute;
+        right: 10px;
       }
 
       #volume-progress {
         background-color: #84bd00;
         margin: 0px;
-        /* width: 30px; */
+      }
+
+      #volume-knob {
+        width: 14px;
+        height: 14px;
+        border-radius: 20px;
+        background-color: #f3f3f3;
+        position: relative;
+        right: 4px;
+        top: -5px;
+        visibility: hidden;
       }
 
       #center-block {
@@ -209,7 +220,9 @@
     <div id="center-block">
       <div id="artCover"></div>
       <div id="volume">
-        <div id="volume-progress"></div>
+        <div id="volume-progress">
+            <div id="volume-knob"></div>
+        </div>
       </div>
     </div>
     <div id="line">
