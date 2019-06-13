@@ -80,13 +80,19 @@
         margin: auto;
       }
 
+
       #volume {
         height: 100%;
       }
 
       #volume-progress {
-        background-color: #1db954;
+        background-color: #b3b3b3;
+        /* background-color: #1db954; */
         margin: 0px;
+      }
+
+      #volume-progress.active{
+        background-color: #1db954;
       }
 
       #volume-knob {
@@ -209,11 +215,19 @@
       }
 
       #progress {
-        background-color: #1db954;
+        background-color: #b3b3b3;
         margin: 0px;
         display: inline-block;
         position: relative;
       }
+      
+      #progress.active {
+        background-color: #1db954;
+      }
+
+      /* #track-progress-bar:hover #progress {
+        background-color: #1db954;
+      } */
 
       #progress-knob {
         width: 14px;
@@ -264,7 +278,7 @@
     
     <div id="track-progress-bar">
       <div id="line">
-        <div id="progress" style="width: 0px">
+        <div id="progress">
             <div id="progress-knob"></div>
         </div>
       </div>

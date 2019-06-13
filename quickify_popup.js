@@ -123,16 +123,19 @@ QuickifyPopup.init = function() {
   // Volume event listeners
   QuickifyPopup.volumeBar.addEventListener('mousedown', function(event) {
     QuickifyPopup.mouseDownOnVolume = true;
+    QuickifyPopup.volumeProgress.classList.toggle('active', true);
     QuickifyPopup.setVolume(event.clientY);
   });
   
   QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
-    QuickifyPopup.volumeKnob.style.visibility = 'visible';  
+    QuickifyPopup.volumeKnob.style.visibility = 'visible';
+    QuickifyPopup.volumeProgress.classList.toggle('active', true);
   });
   
   QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
     if(!QuickifyPopup.mouseDownOnVolume){
       QuickifyPopup.volumeKnob.style.visibility = 'hidden';
+      QuickifyPopup.volumeProgress.classList.toggle('active', false);
     }
   });
   
@@ -144,11 +147,13 @@ QuickifyPopup.init = function() {
   });
   
   QuickifyPopup.trackProgressBar.addEventListener('mouseover', function() {
+    QuickifyPopup.timeProgress.classList.toggle('active', true);
     QuickifyPopup.trackProgressKnob.style.visibility = 'visible';  
   });
   
   QuickifyPopup.trackProgressBar.addEventListener('mouseleave', function() {
     if(!QuickifyPopup.mouseDownOnTrackProgressBar){
+      QuickifyPopup.timeProgress.classList.toggle('active', false);
       QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
     }
   });
@@ -160,6 +165,8 @@ QuickifyPopup.init = function() {
     QuickifyPopup.mouseDownOnTrackProgressBar = false;
     QuickifyPopup.volumeKnob.style.visibility = 'hidden';
     QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
+    QuickifyPopup.timeProgress.classList.toggle('active', false);
+    QuickifyPopup.volumeProgress.classList.toggle('active', false);
   });
   
   document.addEventListener('mousemove', function(e){
