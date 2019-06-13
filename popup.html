@@ -62,20 +62,26 @@
         background: #CCCCCC;
         background-size: cover;
       }
-      #volume, #volume-progress{
+      #volume-bar {
         display: inline-block;
+        height: 100px;
+        width: 14px;
+        position : absolute;
+        margin-top: auto;
+        right: 10px;
+        margin-left: 5px;
+        padding: 0px;
+      }
+
+      #volume, #volume-progress{
         width: 5px;
         background-color: #3e3e40;
-        height: 100px;
         border-radius: 3px;
-        margin: 10px;
+        margin: auto;
       }
 
       #volume {
-        margin-top: auto;
-        position : absolute;
-        right: 10px;
-        margin-left: 5px;
+        height: 100%;
       }
 
       #volume-progress {
@@ -186,19 +192,26 @@
         background-image: url('icons/84bd00-repeat-48.png');
       }
 
+      #track-progress-bar {
+        height: 14px;
+      }
+
       #line, #progress {
         height: 4px;
         background-color: #3e3e40;
         border-radius: 3px;
-        margin: 10px;
         /* border: 1px solid white; */
       }
+
+      #line {
+        margin-top: 5px;
+      }
+
       #progress {
         background-color: #84bd00;
         margin: 0px;
         display: inline-block;
         position: relative;
-        top: -1px;
       }
 
       #progress-knob {
@@ -236,19 +249,23 @@
     </div>
     <div id="center-block">
       <div id="artCover"></div>
-      <div id="volume">
-        <div id="volume-progress">
+      <div id="volume-bar">
+        <div id="volume">
+          <div id="volume-progress">
             <div id="volume-knob"></div>
+          </div>
         </div>
       </div>
     </div>
     
-    <div id="line">
-      <div id="progress" style="width: 0px">
-          <div id="progress-knob"></div>
+    <div id="track-progress-bar">
+      <div id="line">
+        <div id="progress" style="width: 0px">
+            <div id="progress-knob"></div>
+        </div>
       </div>
-      
     </div>
+          
     <div id="times">
       <div id="current"></div>
       <div id="end"></div>

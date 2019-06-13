@@ -82,11 +82,11 @@ QuickifyPopup.init = function() {
   QuickifyPopup.songLength = document.getElementById('end');
   QuickifyPopup.openLinkBtn = document.getElementById('link');
   QuickifyPopup.artCover = document.getElementById('artCover');
-  QuickifyPopup.volumeBar = document.getElementById('volume');
+  QuickifyPopup.volumeBar = document.getElementById('volume-bar');
   QuickifyPopup.volumeProgress = document.getElementById('volume-progress');
   QuickifyPopup.volumeKnob = document.getElementById("volume-knob");
   QuickifyPopup.mouseDownOnVolume = false;
-  QuickifyPopup.trackProgressBar = document.getElementById("line");
+  QuickifyPopup.trackProgressBar = document.getElementById("track-progress-bar");
   QuickifyPopup.trackProgressKnob = document.getElementById("progress-knob");
   QuickifyPopup.mouseDownOnTrackProgressBar = false;
 
@@ -147,7 +147,7 @@ QuickifyPopup.init = function() {
   });
   
   QuickifyPopup.trackProgressBar.addEventListener('mouseleave', function() {
-    if(!QuickifyPopup.mouseDownOnVolume){
+    if(!QuickifyPopup.mouseDownOnTrackProgressBar){
       QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
     }
   });
@@ -170,7 +170,7 @@ QuickifyPopup.init = function() {
     if(QuickifyPopup.mouseDownOnTrackProgressBar){
       QuickifyPopup.sendTrackProgress(e.clientX);
     }
-    
+
   });
   
   // Set up update listener.
