@@ -10,9 +10,11 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.repeatBtn.classList.toggle('on', request.isRepeated);
   QuickifyPopup.addBtn.classList.toggle('done', request.isSaved);
   QuickifyPopup.artCover.style.backgroundImage = request.artCoverUrl;
+  
   var volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
+
 
   // Calculate and display time differently for normal and beta players.
   var percent = 0;
@@ -48,6 +50,12 @@ QuickifyPopup.setTime = function(currentTime, songLength, percent) {
   // TODO handle be able to drag/drop time.
 };
 
+QuickifyPopup.setVolume = function(mouseY) {
+  var bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
+  var height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
+  var volume = (bottom - mouseY) / height;
+  QuickifySendToContent({'command' : QuickifyMessages.CHANGE_VOLUME, 'volume' : volume});
+};
 
 
 QuickifyPopup.init = function() {
@@ -67,6 +75,7 @@ QuickifyPopup.init = function() {
   QuickifyPopup.volumeBar = document.getElementById('volume');
   QuickifyPopup.volumeProgress = document.getElementById('volume-progress');
   QuickifyPopup.volumeKnob = document.getElementById("volume-knob");
+  QuickifyPopup.mouseDownOnVolume = false;
 
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
@@ -96,12 +105,20 @@ QuickifyPopup.init = function() {
       });
   });
 
-  QuickifyPopup.volumeBar.addEventListener('click', function(event) {
-    var volume = 0;
-    var bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
-    var height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
-    volume = (bottom - event.clientY) / height;
-    QuickifySendToContent({'command' : QuickifyMessages.CHANGE_VOLUME, 'volume' : volume});
+  QuickifyPopup.volumeBar.addEventListener('mousedown', function(event) {
+    QuickifyPopup.mouseDownOnVolume = true;
+    QuickifyPopup.setVolume(event.clientY);
+  });
+
+  document.addEventListener('mouseup', function(){
+    QuickifyPopup.mouseDownOnVolume = false;
+    QuickifyPopup.volumeKnob.style.visibility = 'hidden';
+  });
+
+  document.addEventListener('mousemove', function(e){
+    if(QuickifyPopup.mouseDownOnVolume){
+      QuickifyPopup.setVolume(e.clientY);
+    }
   });
 
   QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
@@ -109,7 +126,9 @@ QuickifyPopup.init = function() {
   });
 
   QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
-    QuickifyPopup.volumeKnob.style.visibility = 'hidden';  
+    if(!QuickifyPopup.mouseDownOnVolume){
+      QuickifyPopup.volumeKnob.style.visibility = 'hidden';
+    }
   });
 
   // Set up update listener.
