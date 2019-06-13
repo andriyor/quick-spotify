@@ -10,7 +10,7 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.repeatBtn.classList.toggle('on', request.isRepeated);
   QuickifyPopup.addBtn.classList.toggle('done', request.isSaved);
   QuickifyPopup.artCover.style.backgroundImage = request.artCoverUrl;
-  var volumeSize = 100;
+  var volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
 
