@@ -7,7 +7,7 @@
       :root {
         --background : #282828;
         --background2: #3e3e40;
-        --inactive : #b3b3b3;
+        --inactive : #9e9e9e;
         --active : #1db954;
       }
       body {
@@ -58,6 +58,7 @@
         width: 100%;
         font-size: 14px;
         margin-bottom: 20px;
+        color: var(--inactive);
       }
       #artCover {
         display: inline-block;
@@ -93,7 +94,6 @@
 
       #volume-progress {
         background-color: var(--inactive);
-        /* background-color: #1db954; */
         margin: 0px;
       }
 
@@ -114,7 +114,6 @@
       }
 
       #center-block {
-        /* display:flex; */
         text-align: center;
         height: 110px;
         overflow: auto;
@@ -183,10 +182,6 @@
         /* border-color: #84bd00; */
         background-size: 25px;
       }
-      /* #add.done:hover {
-        background-image: url('icons/white-clear.png');
-        border-color: #eee;
-      } */
       #shuffle, #repeat {
         background-size: 20px 20px;
       }
@@ -217,7 +212,6 @@
         height: 4px;
         background-color: var(--background2);
         border-radius: 3px;
-        /* border: 1px solid white; */
       }
 
       #line {
@@ -234,10 +228,6 @@
       #progress.active {
         background-color: var(--active);
       }
-
-      /* #track-progress-bar:hover #progress {
-        background-color: #1db954;
-      } */
 
       #progress-knob {
         width: 14px;
@@ -268,7 +258,6 @@
     </style>
   </head>
   <body>
-    <!-- <div id="logo"></div> -->
     <div id="link"></div>
 
     <div id="info">
