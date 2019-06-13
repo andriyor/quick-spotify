@@ -47,8 +47,10 @@ QuickifyPopup.setTime = function(currentTime, songLength, percent) {
   QuickifyPopup.songLength.textContent = songLength;
   var newWidth = percent * 280;
   QuickifyPopup.timeProgress.style.width = Math.round(newWidth) + 'px';
-  // TODO handle be able to drag/drop time.
+  QuickifyPopup.trackProgressKnob.style.transform = "translateX(" + newWidth + "px)";
 };
+
+
 
 // Change the volume from te mouse position over the volume bar
 QuickifyPopup.setVolume = function(mouseY) {
@@ -59,7 +61,7 @@ QuickifyPopup.setVolume = function(mouseY) {
 };
 
 // Change the track progress from te mouse position over the track progress bar
-QuickifyPopup.setTrackProgress = function(mouseX){
+QuickifyPopup.sendTrackProgress = function(mouseX){
   var left = QuickifyPopup.trackProgressBar.getBoundingClientRect().left;
   var width = QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
   var progress = (mouseX - left) / width;
@@ -85,6 +87,8 @@ QuickifyPopup.init = function() {
   QuickifyPopup.volumeKnob = document.getElementById("volume-knob");
   QuickifyPopup.mouseDownOnVolume = false;
   QuickifyPopup.trackProgressBar = document.getElementById("line");
+  QuickifyPopup.trackProgressKnob = document.getElementById("progress-knob");
+  QuickifyPopup.mouseDownOnTrackProgressBar = false;
 
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
@@ -134,20 +138,39 @@ QuickifyPopup.init = function() {
 
   // Track progrress event listener
   QuickifyPopup.trackProgressBar.addEventListener('mousedown', function(event){
-    QuickifyPopup.setTrackProgress(event.clientX);
+    QuickifyPopup.mouseDownOnTrackProgressBar = true;
+    QuickifyPopup.sendTrackProgress(event.clientX);
+  });
+  
+  QuickifyPopup.trackProgressBar.addEventListener('mouseover', function() {
+    QuickifyPopup.trackProgressKnob.style.visibility = 'visible';  
+  });
+  
+  QuickifyPopup.trackProgressBar.addEventListener('mouseleave', function() {
+    if(!QuickifyPopup.mouseDownOnVolume){
+      QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
+    }
   });
 
 
   // Document event listener
   document.addEventListener('mouseup', function(){
     QuickifyPopup.mouseDownOnVolume = false;
+    QuickifyPopup.mouseDownOnTrackProgressBar = false;
     QuickifyPopup.volumeKnob.style.visibility = 'hidden';
+    QuickifyPopup.mouseDownOnTrackProgressBar.style.visibility = 'hidden';
   });
-
+  
   document.addEventListener('mousemove', function(e){
+    
+    // Allows to drag the volume and track progress sliders
     if(QuickifyPopup.mouseDownOnVolume){
       QuickifyPopup.setVolume(e.clientY);
     }
+    if(QuickifyPopup.mouseDownOnTrackProgressBar){
+      QuickifyPopup.sendTrackProgress(e.clientX);
+    }
+    
   });
   
   // Set up update listener.

@@ -115,7 +115,6 @@ Quickify.shuffle  = function() {
 };
 
 Quickify.changeVolume = function(volume){
-  Quickify.log("Changing volume to : " + volume);
   var progressBar = document.querySelector(".volume-bar").querySelector(".progress-bar");
   var left = progressBar.getBoundingClientRect().left;
   var width = progressBar.getBoundingClientRect().width;
@@ -126,7 +125,6 @@ Quickify.changeVolume = function(volume){
 };
 
 Quickify.changeTrackProgress = function(progress){
-  Quickify.log("Changing track progress to : " + progress);
   var progressBar = document.querySelector(".playback-bar").querySelector(".progress-bar");
   var left = progressBar.getBoundingClientRect().left;
   var width = progressBar.getBoundingClientRect().width;

@@ -191,12 +191,16 @@
         background-color: #3e3e40;
         border-radius: 3px;
         margin: 10px;
+        /* border: 1px solid white; */
       }
       #progress {
         background-color: #84bd00;
         margin: 0px;
+        display: inline-block;
+        position: relative;
+        top: -1px;
       }
-/* 
+
       #progress-knob {
         width: 14px;
         height: 14px;
@@ -205,8 +209,8 @@
         position: relative;
         right: 4px;
         top: -5px;
-        visibility: visible;
-      } */
+        visibility: hidden;
+      }
 
       #times {
         font-size: 12px;
@@ -238,10 +242,12 @@
         </div>
       </div>
     </div>
+    
     <div id="line">
       <div id="progress" style="width: 0px">
-        <div id="progress-knob"></div>
+          <div id="progress-knob"></div>
       </div>
+      
     </div>
     <div id="times">
       <div id="current"></div>
