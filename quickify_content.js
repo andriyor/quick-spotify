@@ -53,21 +53,21 @@ Quickify.broadcast = function() {
   var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
   var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
   var addedButton = document.querySelector("button.control-button[class*='spoticon-added']");
-  var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
-
+  
   statusMsg.song = trackName.textContent;
   statusMsg.artist = trackArtist.textContent;
   statusMsg.artCoverUrl = artCoverUrl;
-
+  
   statusMsg.songLength = trackLengthDiv.textContent;
   statusMsg.currentTime = trackCurrentDiv.textContent;
-
+  
   statusMsg.isPlaying = pauseButton ? true : false;
   statusMsg.isSaved = addedButton ? true : false;
   statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
   statusMsg.isRepeated = repeatButton.classList.contains("control-button--active");
-
+  
   // Retreive and format the volume value
+  var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
   var width = volumeProgressBar.getBoundingClientRect().width;
   var style = window.getComputedStyle(volumeProgressBar);
   var translate = new WebKitCSSMatrix(style.webkitTransform).m41;
@@ -125,6 +125,17 @@ Quickify.changeVolume = function(volume){
   progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));
 };
 
+Quickify.changeTrackProgress = function(progress){
+  Quickify.log("Changing track progress to : " + progress);
+  var progressBar = document.querySelector(".playback-bar").querySelector(".progress-bar");
+  var left = progressBar.getBoundingClientRect().left;
+  var width = progressBar.getBoundingClientRect().width;
+  var clientX = left + progress * width;
+
+  progressBar.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, clientX}));
+  progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));
+};
+
 Quickify.init = function() {
   // Setup listeners.
   browser.runtime.onMessage.addListener(
@@ -155,8 +166,11 @@ Quickify.init = function() {
             Quickify.shuffle();
             break;
           case QuickifyMessages.CHANGE_VOLUME:
-              Quickify.changeVolume(request.volume);
-              break;
+            Quickify.changeVolume(request.volume);
+            break;
+          case QuickifyMessages.CHANGE_TRACK_PROGRESS:
+            Quickify.changeTrackProgress(request.progress);
+            break;
           default:
             Quickify.log("I don't know how to handle this message: " + request);
             return;

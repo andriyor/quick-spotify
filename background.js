@@ -34,6 +34,9 @@ browser.commands.onCommand.addListener(function(command) {
     case 'change-volume':
       msg = QuickifyMessages.CHANGE_VOLUME;
       break;
+    case 'change-track-progress':
+    msg = QuickifyMessages.CHANGE_TRACK_PROGRESS;
+    break;
     default:
       window.console.log('CANNOT HANDLE THIS COMMAND: ' + command);
       return;

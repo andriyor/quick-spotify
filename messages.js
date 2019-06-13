@@ -8,7 +8,8 @@ var QuickifyMessages = {
   POPUP_ON: 'q popup on',
   POPUP_OFF: 'q popup off',
   STATUS: 'q status',
-  CHANGE_VOLUME: 'q change-volume'
+  CHANGE_VOLUME: 'q change-volume',
+  CHANGE_TRACK_PROGRESS : 'q change-track-progress'
 };
 
 var QuickifyUrl = 'https://open.spotify.com/*';

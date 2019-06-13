@@ -50,6 +50,7 @@ QuickifyPopup.setTime = function(currentTime, songLength, percent) {
   // TODO handle be able to drag/drop time.
 };
 
+// Change the volume from te mouse position over the volume bar
 QuickifyPopup.setVolume = function(mouseY) {
   var bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
   var height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
@@ -57,6 +58,13 @@ QuickifyPopup.setVolume = function(mouseY) {
   QuickifySendToContent({'command' : QuickifyMessages.CHANGE_VOLUME, 'volume' : volume});
 };
 
+// Change the track progress from te mouse position over the track progress bar
+QuickifyPopup.setTrackProgress = function(mouseX){
+  var left = QuickifyPopup.trackProgressBar.getBoundingClientRect().left;
+  var width = QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
+  var progress = (mouseX - left) / width;
+  QuickifySendToContent({'command' : QuickifyMessages.CHANGE_TRACK_PROGRESS, 'progress' : progress});
+};
 
 QuickifyPopup.init = function() {
   QuickifyPopup.song = document.getElementById('song');
@@ -76,6 +84,7 @@ QuickifyPopup.init = function() {
   QuickifyPopup.volumeProgress = document.getElementById('volume-progress');
   QuickifyPopup.volumeKnob = document.getElementById("volume-knob");
   QuickifyPopup.mouseDownOnVolume = false;
+  QuickifyPopup.trackProgressBar = document.getElementById("line");
 
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
@@ -105,11 +114,31 @@ QuickifyPopup.init = function() {
       });
   });
 
+
+  // Volume event listeners
   QuickifyPopup.volumeBar.addEventListener('mousedown', function(event) {
     QuickifyPopup.mouseDownOnVolume = true;
     QuickifyPopup.setVolume(event.clientY);
   });
+  
+  QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
+    QuickifyPopup.volumeKnob.style.visibility = 'visible';  
+  });
+  
+  QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
+    if(!QuickifyPopup.mouseDownOnVolume){
+      QuickifyPopup.volumeKnob.style.visibility = 'hidden';
+    }
+  });
+  
 
+  // Track progrress event listener
+  QuickifyPopup.trackProgressBar.addEventListener('mousedown', function(event){
+    QuickifyPopup.setTrackProgress(event.clientX);
+  });
+
+
+  // Document event listener
   document.addEventListener('mouseup', function(){
     QuickifyPopup.mouseDownOnVolume = false;
     QuickifyPopup.volumeKnob.style.visibility = 'hidden';
@@ -120,17 +149,7 @@ QuickifyPopup.init = function() {
       QuickifyPopup.setVolume(e.clientY);
     }
   });
-
-  QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
-    QuickifyPopup.volumeKnob.style.visibility = 'visible';  
-  });
-
-  QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
-    if(!QuickifyPopup.mouseDownOnVolume){
-      QuickifyPopup.volumeKnob.style.visibility = 'hidden';
-    }
-  });
-
+  
   // Set up update listener.
   browser.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
 
