@@ -45,7 +45,7 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
 QuickifyPopup.setTime = function(currentTime, songLength, percent) {
   QuickifyPopup.currentTime.textContent = currentTime;
   QuickifyPopup.songLength.textContent = songLength;
-  var newWidth = percent * 280;
+  var newWidth = percent * QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
   QuickifyPopup.timeProgress.style.width = Math.round(newWidth) + 'px';
   QuickifyPopup.trackProgressKnob.style.transform = "translateX(" + newWidth + "px)";
 };
@@ -65,6 +65,7 @@ QuickifyPopup.sendTrackProgress = function(mouseX){
   var left = QuickifyPopup.trackProgressBar.getBoundingClientRect().left;
   var width = QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
   var progress = (mouseX - left) / width;
+  console.log("Set progress : " + progress);
   QuickifySendToContent({'command' : QuickifyMessages.CHANGE_TRACK_PROGRESS, 'progress' : progress});
 };
 
@@ -158,7 +159,7 @@ QuickifyPopup.init = function() {
     QuickifyPopup.mouseDownOnVolume = false;
     QuickifyPopup.mouseDownOnTrackProgressBar = false;
     QuickifyPopup.volumeKnob.style.visibility = 'hidden';
-    QuickifyPopup.mouseDownOnTrackProgressBar.style.visibility = 'hidden';
+    QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
   });
   
   document.addEventListener('mousemove', function(e){

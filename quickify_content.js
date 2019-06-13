@@ -52,7 +52,7 @@ Quickify.broadcast = function() {
   var shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
   var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
   var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
-  var addedButton = document.querySelector("button.control-button[class*='spoticon-added']");
+  var addedButton = document.querySelector("button.control-button[class*='spoticon-heart-active-16']");
   
   statusMsg.song = trackName.textContent;
   statusMsg.artist = trackArtist.textContent;
@@ -101,7 +101,7 @@ Quickify.previous = function() {
 
 
 Quickify.save = function() {
-  (document.querySelector("button.control-button[class*='spoticon-add']") || document.querySelector("button.control-button[class*='spoticon-added']")).click();
+  (document.querySelector("button.control-button[class*='spoticon-heart-16']") || document.querySelector("button.control-button[class*='spoticon-heart-active-16']")).click();
 };
 
 

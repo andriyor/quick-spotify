@@ -6,7 +6,7 @@
     <style>
       body {
         width: 300px;
-        background-color: #1c1c1f;
+        background-color: #282828;
         color: #dfe0e6;
         font-family: 'proxima_nova','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 14px;
@@ -85,7 +85,7 @@
       }
 
       #volume-progress {
-        background-color: #84bd00;
+        background-color: #1db954;
         margin: 0px;
       }
 
@@ -98,6 +98,7 @@
         right: 4px;
         top: -5px;
         visibility: hidden;
+        box-shadow: 1px 1px 3px #000;
       }
 
       #center-block {
@@ -161,19 +162,19 @@
         top: 6px;
         width: 28px;
         height: 28px;
-        border-radius: 50%;
-        border: 1px solid transparent;
-        background-image: url('icons/white-add.png');
+        /* border-radius: 50%; */
+        /* border: 1px solid transparent; */
+        background-image: url('icons/heart-white.png');
       }
       #add.done {
-        background-image: url('icons/white-check.png');
-        border-color: #84bd00;
+        background-image: url('icons/heart-green.png');
+        /* border-color: #84bd00; */
         background-size: 25px;
       }
-      #add.done:hover {
+      /* #add.done:hover {
         background-image: url('icons/white-clear.png');
         border-color: #eee;
-      }
+      } */
       #shuffle, #repeat {
         background-size: 20px 20px;
       }
@@ -208,7 +209,7 @@
       }
 
       #progress {
-        background-color: #84bd00;
+        background-color: #1db954;
         margin: 0px;
         display: inline-block;
         position: relative;
@@ -220,9 +221,10 @@
         border-radius: 20px;
         background-color: #f3f3f3;
         position: relative;
-        right: 4px;
+        right: 7px;
         top: -5px;
         visibility: hidden;
+        box-shadow: 1px 1px 3px #000;
       }
 
       #times {
@@ -237,10 +239,12 @@
       #end {
         float: right;
       }
+
+   
     </style>
   </head>
   <body>
-    <div id="logo"></div>
+    <!-- <div id="logo"></div> -->
     <div id="link"></div>
 
     <div id="info">
@@ -252,7 +256,7 @@
       <div id="volume-bar">
         <div id="volume">
           <div id="volume-progress">
-            <div id="volume-knob"></div>
+            <div id="volume-knob" class="knob"></div>
           </div>
         </div>
       </div>
