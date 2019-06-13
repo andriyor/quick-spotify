@@ -4,9 +4,15 @@
     <script src="messages.js"></script>
     <script src="quickify_popup.js"></script>
     <style>
+      :root {
+        --background : #282828;
+        --background2: #3e3e40;
+        --inactive : #b3b3b3;
+        --active : #1db954;
+      }
       body {
         width: 300px;
-        background-color: #282828;
+        background-color: var(--background);
         color: #dfe0e6;
         font-family: 'proxima_nova','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 14px;
@@ -75,7 +81,7 @@
 
       #volume, #volume-progress{
         width: 5px;
-        background-color: #3e3e40;
+        background-color: var(--background2);
         border-radius: 3px;
         margin: auto;
       }
@@ -86,13 +92,13 @@
       }
 
       #volume-progress {
-        background-color: #b3b3b3;
+        background-color: var(--inactive);
         /* background-color: #1db954; */
         margin: 0px;
       }
 
       #volume-progress.active{
-        background-color: #1db954;
+        background-color: var(--active);
       }
 
       #volume-knob {
@@ -205,7 +211,7 @@
 
       #line, #progress {
         height: 4px;
-        background-color: #3e3e40;
+        background-color: var(--background2);
         border-radius: 3px;
         /* border: 1px solid white; */
       }
@@ -215,14 +221,14 @@
       }
 
       #progress {
-        background-color: #b3b3b3;
+        background-color: var(--inactive);
         margin: 0px;
         display: inline-block;
         position: relative;
       }
       
       #progress.active {
-        background-color: #1db954;
+        background-color: var(--active);
       }
 
       /* #track-progress-bar:hover #progress {
