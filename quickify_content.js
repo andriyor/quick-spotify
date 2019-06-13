@@ -64,7 +64,16 @@ Quickify.broadcast = function() {
   statusMsg.isPlaying = pauseButton ? true : false;
   statusMsg.isSaved = addedButton ? true : false;
   statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
-  statusMsg.isRepeated = repeatButton.classList.contains("control-button--active");
+  
+  if(repeatButton.classList.contains("control-button--active")){
+    if(repeatButton.classList.contains("spoticon-repeatonce-16")){
+      statusMsg.repeatMode = "once";
+    } else {
+      statusMsg.repeatMode = "repeat";
+    }
+  } else {
+    statusMsg.repeatMode = 'off';
+  }
   
   // Retreive and format the volume value
   var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");

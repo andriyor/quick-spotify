@@ -7,13 +7,32 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.artist.textContent = request.artist;
   QuickifyPopup.playpauseBtn.classList.toggle('pause', request.isPlaying);
   QuickifyPopup.shuffleBtn.classList.toggle('on', request.isShuffled);
-  QuickifyPopup.repeatBtn.classList.toggle('on', request.isRepeated);
   QuickifyPopup.addBtn.classList.toggle('done', request.isSaved);
   QuickifyPopup.artCover.style.backgroundImage = request.artCoverUrl;
   
   var volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
+
+  // console.log(request.repeatMode);
+
+  switch (request.repeatMode) {
+    case "repeat":
+      QuickifyPopup.repeatBtn.classList.toggle('repeat', true);
+      QuickifyPopup.repeatBtn.classList.toggle('repeatonce', false);
+      console.log("Repeat");
+      break;
+    case "once":
+        QuickifyPopup.repeatBtn.classList.toggle('repeat', false);
+        QuickifyPopup.repeatBtn.classList.toggle('repeatonce', true);
+        console.log("Once");
+      break;
+    default:
+        QuickifyPopup.repeatBtn.classList.toggle('repeat', false);
+        QuickifyPopup.repeatBtn.classList.toggle('repeatonce', false);
+        console.log("Off");
+      break;
+  }
 
 
   // Calculate and display time differently for normal and beta players.
