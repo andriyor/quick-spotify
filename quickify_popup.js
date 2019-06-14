@@ -14,23 +14,18 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
 
-  // console.log(request.repeatMode);
-
   switch (request.repeatMode) {
     case "repeat":
       QuickifyPopup.repeatBtn.classList.toggle('repeat', true);
       QuickifyPopup.repeatBtn.classList.toggle('repeatonce', false);
-      console.log("Repeat");
       break;
     case "once":
         QuickifyPopup.repeatBtn.classList.toggle('repeat', false);
         QuickifyPopup.repeatBtn.classList.toggle('repeatonce', true);
-        console.log("Once");
       break;
     default:
         QuickifyPopup.repeatBtn.classList.toggle('repeat', false);
         QuickifyPopup.repeatBtn.classList.toggle('repeatonce', false);
-        console.log("Off");
       break;
   }
 
@@ -100,7 +95,7 @@ QuickifyPopup.init = function() {
   QuickifyPopup.currentTime = document.getElementById('current');
   QuickifyPopup.timeProgress = document.getElementById('progress');
   QuickifyPopup.songLength = document.getElementById('end');
-  QuickifyPopup.openLinkBtn = document.getElementById('link');
+  // QuickifyPopup.openLinkBtn = document.getElementById('link');
   QuickifyPopup.artCover = document.getElementById('artCover');
   QuickifyPopup.volumeBar = document.getElementById('volume-bar');
   QuickifyPopup.volumeProgress = document.getElementById('volume-progress');
@@ -129,14 +124,14 @@ QuickifyPopup.init = function() {
   QuickifyPopup.repeatBtn.addEventListener('click', function() {
     QuickifySendToContent({'command' : QuickifyMessages.REPEAT});
   });
-  QuickifyPopup.openLinkBtn.addEventListener('click', function() {
-    browser.tabs.query({url: QuickifyUrl},
-      function(tabs) {
-        if (tabs.length) {
-          browser.tabs.update(tabs[0].id, {active: true});
-        }
-      });
-  });
+  // QuickifyPopup.openLinkBtn.addEventListener('click', function() {
+  //   browser.tabs.query({url: QuickifyUrl},
+  //     function(tabs) {
+  //       if (tabs.length) {
+  //         browser.tabs.update(tabs[0].id, {active: true});
+  //       }
+  //     });
+  // });
 
 
   // Volume event listeners
