@@ -26,11 +26,19 @@ browser.commands.onCommand.addListener(function(command) {
       msg = QuickifyMessages.SAVE;
       break;
     case 'repeat':
-      msg = QuickifyMessages.REPEAT;
+
+      msg= QuickifyMessages.REPEAT;
       break;
     case 'shuffle':
       msg = QuickifyMessages.SHUFFLE;
       break;
+
+    case 'change-volume':
+      msg = QuickifyMessages.CHANGE_VOLUME;
+      break;
+    case 'change-track-progress':
+    msg = QuickifyMessages.CHANGE_TRACK_PROGRESS;
+    break;
     default:
       window.console.log('CANNOT HANDLE THIS COMMAND: ' + command);
       return;
