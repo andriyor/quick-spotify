@@ -64,7 +64,6 @@ QuickifyPopup.setTime = function(currentTime, songLength, percent) {
 };
 
 
-
 // Change the volume from te mouse position over the volume bar
 QuickifyPopup.setVolume = function(mouseY) {
   var bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
@@ -152,7 +151,6 @@ QuickifyPopup.init = function() {
     }
   });
   
-
   // Track progrress event listener
   QuickifyPopup.trackProgressBar.addEventListener('mousedown', function(event){
     QuickifyPopup.mouseDownOnTrackProgressBar = true;
@@ -170,7 +168,6 @@ QuickifyPopup.init = function() {
       QuickifyPopup.trackProgressKnob.style.visibility = 'hidden';
     }
   });
-
 
   // Document event listener
   document.addEventListener('mouseup', function(){
