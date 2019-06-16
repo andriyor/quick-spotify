@@ -105,6 +105,11 @@ QuickifyPopup.init = function() {
 
   QuickifyPopup.styleFolder = "/style/";
 
+  // let theme = localStorage.getItem("currentTheme");
+  QuickifyPopup.currentTheme =  QuickifyThemes.DEFAULT;
+
+  QuickifyPopup.setTheme(QuickifyPopup.currentTheme);
+
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
     QuickifySendToContent({'command' : QuickifyMessages.PREVIOUS});
@@ -195,8 +200,6 @@ QuickifyPopup.init = function() {
   
   // Set up update listener.
   browser.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
-
-  QuickifyPopup.setTheme("blue");
 
 
   // Notify content we have started.

@@ -34,6 +34,11 @@
     }
   ],
 
+  "options_ui": {
+    "page": "options.html"
+  },
+
+
   "permissions": [
     "tabs",
     "https://open.spotify.com/*",
