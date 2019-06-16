@@ -5,18 +5,24 @@
     <script src="quickify_popup.js"></script>
     <style>
       :root {
+        /* TODO : theme ? */
         --background : #282828;
         --background2: #3e3e40;
-        --inactive : #9e9e9e;
-        --active : #1db954;
+        --background3: #7fbcc9;
+        --inactive : #5b7696;
+        --active : #7ba1ce;
+        --song : #ffecab;
+        --artist : #3e3e40;
       }
       body {
-        width: 300px;
-        background-color: var(--background);
+        width: 350px;
+        /* background-color: var(--background); */
+        background-color: #fff;
         color: #dfe0e6;
         font-family: 'proxima_nova','Helvetica Neue',Helvetica,Arial,sans-serif;
         font-size: 14px;
         z-index: 3;
+        margin: 0px;
       }
 
       #center-block {
@@ -24,12 +30,14 @@
         align-items: center;
         justify-content: space-between;
         height: 110px;
-        padding: 3px 3px 8px 3px;
+        padding: 10px 8px 12px 8px;
+        background-color: var(--background3);
       }
 
       #info {
-        margin-left:auto;
-        margin-right:auto;
+        /* margin-left:auto; */
+        /* margin-right:auto; */
+        margin: 9px;
       }
 
       #song {
@@ -37,13 +45,13 @@
         font-size: 18px;
         font-weight: 500;
         z-index: 1;
+        color: var(--song);
       }
       #artist {
         text-align: center;
         width: 100%;
-
         font-size: 16px;
-        color: var(--inactive);
+        color: var(--artist);
       }
       #artCover {
         flex-shrink: 0;
@@ -92,8 +100,16 @@
         box-shadow: 1px 1px 3px #000;
       }
 
+      #bottom-block {
+        background-color: var(--background);
+        padding: 4px 4px 8px 4px;
+      }
+
       #controls {
-        position: relative;
+        /* position: relative; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         height: 42px;
       }
       #prev, #playpause, #next, #shuffle, #repeat, #add {
@@ -104,10 +120,33 @@
         height: 32px;
         opacity: 0.8;
         cursor: pointer;
-        display: inline-block;
-        position: absolute;
-        top: 5px;
       }
+
+      #controls-buttons-left {
+        display: flex;
+        align-content: center;
+        justify-content: flex-start;
+        flex-grow: 1;
+        flex-basis: 20%;
+      }
+      
+      #controls-buttons-center {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex-grow: 2;
+        flex-basis: 60%;
+      }
+  
+      #controls-buttons-right {
+        display: flex;
+        align-content: center;
+        justify-content: flex-end;
+        flex-grow: 1;
+        flex-basis: 20%;
+      }
+
+
       #prev:hover, #playpause:hover, #next:hover, #shuffle:hover,
       #repeat:hover, #add:hover {
         opacity: 1;
@@ -138,11 +177,8 @@
       }
       #next {
         background-image: url('icons/white-end-48.png');
-        left: 174px;
       }
       #add {
-        left: 5px;
-        top: 6px;
         width: 28px;
         height: 28px;
         background-image: url('icons/heart-white.png');
@@ -155,14 +191,12 @@
         background-size: 20px 20px;
       }
       #shuffle {
-        left: 238px;
         background-image: url('icons/white-shuffle-48.png');
       }
       #shuffle.on {
         background-image: url('icons/green-shuffle-48.png');
       }
       #repeat {
-        left: 265px;
         background-image: url('icons/white-repeat-48.png');
       }
 
@@ -182,10 +216,16 @@
       }
 
       #track-progress-bar {
-        display: inline-block;
-        position: relative;
         height: 14px;
-        width: 210px;
+        flex-basis: 76%;
+      }
+
+      #current {
+        justify-content: flex-start;
+      }
+      
+      #end {
+        justify-content: flex-end;
       }
 
       #line, #progress {
@@ -253,25 +293,36 @@
       
     </div>
     
-    <div id="progress-block" class="">
-      <div id="current" class="">00:00</div>
-      <div id="track-progress-bar" class="">
-        <div id="line" class="">
-          <div id="progress">
-            <div id="progress-knob"></div>
+    <div id="bottom-block">
+      <div id="progress-block" class="">
+        <div id="current" class="">00:00</div>
+        <div id="track-progress-bar" class="">
+          <div id="line" class="">
+            <div id="progress">
+              <div id="progress-knob"></div>
+            </div>
           </div>
         </div>
+        <div id="end" class="">99:99</div>
       </div>
-      <div id="end" class="">99:99</div>
-    </div>
       
-    <div id="controls">
-      <div id="prev"></div>
-      <div id="playpause"></div>
-      <div id="next"></div>
-      <div id="shuffle"></div>
-      <div id="repeat"></div>
-      <div id="add"></div>
-    </div>  
-  </body>
+      <div id="controls">
+        <div id="controls-buttons-left">
+          <div id="add"></div>
+        </div>
+        
+        <div id="controls-buttons-center">
+          <div id="prev"></div>
+          <div id="playpause"></div>
+          <div id="next"></div>
+        </div>
+        
+        <div id="controls-buttons-right">
+          <div id="shuffle"></div>
+          <div id="repeat"></div>
+        </div>
+
+      </div>  
+    </div>
+    </body>
 </html>
