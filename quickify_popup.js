@@ -106,6 +106,9 @@ QuickifyPopup.init = function() {
   QuickifyPopup.styleFolder = "/style/";
 
   let theme = localStorage.getItem("currentTheme");
+  if(!theme) {
+    localStorage.setItem("currentTheme", QuickifyThemes.DEFAULT);
+  }
   QuickifyPopup.currentTheme =  theme || QuickifyThemes.DEFAULT;
 
   QuickifyPopup.setTheme(QuickifyPopup.currentTheme);
