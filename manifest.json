@@ -36,6 +36,7 @@
 
   "permissions": [
     "tabs",
-    "https://open.spotify.com/*"
+    "https://open.spotify.com/*",
+    "storage"
   ]
 }

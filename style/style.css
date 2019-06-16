@@ -1,0 +1,213 @@
+:root {
+  /* TODO : theme ? */
+  --background : #282828;
+  --background2: #3e3e40;
+  --background3: #7fbcc9;
+  --inactive : #5b7696;
+  --active : #7ba1ce;
+  --song : #ffecab;
+  --artist : #3e3e40;
+}
+body {
+  width: 350px;
+  font-family: 'proxima_nova','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  z-index: 3;
+  margin: 0px;
+}
+
+#center-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 110px;
+  padding: 10px 8px 12px 8px;
+}
+
+#info {
+  margin: 9px;
+}
+
+#song {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  z-index: 1;
+}
+#artist {
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+}
+#artCover {
+  flex-shrink: 0;
+  height: 110px;
+  width: 110px;
+  background-size: cover;
+}
+#volume-bar {
+  height: 100%;
+  width: 14px;
+  margin-top: auto;
+  margin-left: 5px;
+  padding: 0px;
+}
+
+#volume, #volume-progress{
+  width: 5px;
+  border-radius: 3px;
+  margin: auto;
+}
+
+#volume {
+  height: 100%;
+}
+
+#volume-progress {
+  margin: 0px;
+}
+
+#volume-knob {
+  width: 14px;
+  height: 14px;
+  border-radius: 20px;
+  position: relative;
+  right: 4px;
+  top: -5px;
+  visibility: hidden;
+}
+
+#bottom-block {
+  padding: 4px 4px 8px 4px;
+}
+
+#controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 42px;
+}
+#prev, #playpause, #next, #shuffle, #repeat, #add {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 32px;
+  height: 32px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#controls-buttons-left {
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  flex-basis: 20%;
+}
+
+#controls-buttons-center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-grow: 2;
+  flex-basis: 60%;
+}
+
+#controls-buttons-right {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  flex-basis: 20%;
+}
+
+
+#prev:hover, #playpause:hover, #next:hover, #shuffle:hover,
+#repeat:hover, #add:hover {
+  opacity: 1;
+}
+#prev {
+  /* background-image: url('icons/white-skip-to-start-48.png'); */
+  left: 94px;
+}
+#playpause {
+  background-size: 28px;
+  background-position-x: 6px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  top: 2px;
+  left: 131px;
+
+  transition: all .05s ease-in-out;
+}
+#playpause:hover {
+  transform: scale(1.05);
+}
+#playpause.pause {
+  background-position-x: 4px;
+}
+#next {
+}
+#add {
+  width: 28px;
+  height: 28px;
+}
+#add.done {
+  background-size: 25px;
+}
+#shuffle, #repeat {
+  background-size: 20px 20px;
+}
+
+#progress-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0px 0px 0px;
+}
+
+#track-progress-bar {
+  height: 14px;
+  flex-basis: 76%;
+}
+
+#current {
+  justify-content: flex-start;
+}
+
+#end {
+  justify-content: flex-end;
+}
+
+#line, #progress {
+  height: 4px;
+  border-radius: 3px;
+}
+
+#line {
+  display: inline-block;
+  position: relative;
+  margin-top: 5px;
+  width: 100%;
+}
+
+#progress {
+  margin: 0px;
+  display: inline-block;
+  position: relative;
+}
+
+#progress-knob {
+  width: 14px;
+  height: 14px;
+  border-radius: 20px;
+  position: relative;
+  right: 7px;
+  top: -5px;
+  visibility: hidden;
+}
+
+.debug {
+  border: 1px solid blue;
+}
