@@ -103,6 +103,8 @@ QuickifyPopup.init = function() {
   QuickifyPopup.trackProgressKnob = document.getElementById("progress-knob");
   QuickifyPopup.mouseDownOnTrackProgressBar = false;
 
+  QuickifyPopup.styleFolder = "/style/";
+
   // Add listeners for buttons.
   QuickifyPopup.prevBtn.addEventListener('click', function() {
     QuickifySendToContent({'command' : QuickifyMessages.PREVIOUS});
@@ -194,12 +196,20 @@ QuickifyPopup.init = function() {
   // Set up update listener.
   browser.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
 
+  QuickifyPopup.setTheme("blue");
+
+
   // Notify content we have started.
   QuickifySendToContent({'command' : QuickifyMessages.POPUP_ON});
 };
 
 QuickifyPopup.exit = function() {
   QuickifySendToContent({'command' : QuickifyMessages.POPUP_OFF});
+};
+
+QuickifyPopup.setTheme = function(theme) {
+  let sheet = QuickifyPopup.styleFolder + theme + "/theme.css";
+  document.getElementById("theme-sheet").setAttribute("href", sheet);
 };
 
 window.onload = QuickifyPopup.init;
