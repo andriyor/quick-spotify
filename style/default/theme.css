@@ -24,9 +24,6 @@ body {
 #artist {
   color: var(--artist);
 }
-#artCover {
-  background: #CCCCCC;
-}
 
 #volume, #volume-progress{
   background-color: var(--background2);
