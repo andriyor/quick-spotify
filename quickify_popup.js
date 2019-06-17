@@ -103,7 +103,7 @@ QuickifyPopup.init = function() {
   QuickifyPopup.trackProgressKnob = document.getElementById("progress-knob");
   QuickifyPopup.mouseDownOnTrackProgressBar = false;
 
-  QuickifyPopup.styleFolder = "/style/";
+  QuickifyPopup.styleFolder = "style/";
 
   let theme = localStorage.getItem("currentTheme");
   if(!theme) {
