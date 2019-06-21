@@ -1,9 +1,9 @@
 :root {
   --background : #282828;
   --background2: #3e3e40;
-  --background3: #AD80C2;
-  --inactive : #A4B874;
-  --active : rgb(186, 223, 101);
+  --background3: #d4a8e6;
+  --inactive : #b0c77b;
+  --active : #cdf56f;
   --song : #fff;
   --artist : #282828;
 }
