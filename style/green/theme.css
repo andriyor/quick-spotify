@@ -1,11 +1,11 @@
 :root {
   --background : #282828;
   --background2: #3e3e40;
-  --background3: #4DA159;
-  --inactive : #91586d;
+  --background3: #78b882;
+  --inactive : #a87b8c;
   --active : #c4537c;
-  --song : #fff;
-  --artist : #282828;
+  --song : #ffffff;
+  --artist : #1b1b1b;
 }
 body {
   background-color: var(--background);
