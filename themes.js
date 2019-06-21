@@ -1,5 +1,6 @@
 var QuickifyThemes = {
   DEFAULT : "default",
   BLUE  : "blue",
-  GREEN : "green"
+  GREEN : "green",
+  PURPLE : 'purple'
 }
