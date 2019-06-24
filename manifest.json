@@ -43,5 +43,11 @@
     "tabs",
     "https://open.spotify.com/*",
     "storage"
-  ]
+  ],
+
+  "applications": {
+    "gecko": {
+      "update_url": "https://github.com/Alvicc/quick-spotify/blob/auto-updates/updates.json"
+    }
+  }
 }
