@@ -47,7 +47,7 @@
 
   "applications": {
     "gecko": {
-      "update_url": "https://github.com/Alvicc/quick-spotify/blob/auto-updates/updates.json"
+      "update_url": "https://raw.githubusercontent.com/Alvicc/quick-spotify/auto-updates/updates.json"
     }
   }
 }
