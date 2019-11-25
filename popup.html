@@ -1,181 +1,63 @@
 <html>
   <head>
+    <meta charset="UTF-8"> 
+    <script src="themes.js"></script>
     <script src="messages.js"></script>
     <script src="quickify_popup.js"></script>
-    <style>
-      body {
-        width: 300px;
-        background-color: #1c1c1f;
-        color: #dfe0e6;
-        font-family: 'proxima_nova','Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 14px;
-      }
-      #logo {
-        position: fixed;
-        background-image: url('icons/quickify_38.png');
-        background-size: 20px 20px;
-        background-repeat: no-repeat;
-        width: 20px;
-        height: 20px;
-        top: 5px;
-        left: 5px;
-      }
-      #link {
-        position: fixed;
-        background-image: url('icons/white-ext-link.png');
-        background-size: 18px 18px;
-        background-repeat: no-repeat;
-        cursor: pointer;
-        width: 20px;
-        height: 20px;
-        top: 5px;
-        right: 5px;
-        opacity: 0.6;
-      }
-      #link:hover {
-        opacity: 1;
-      }
-      #song {
-        text-align: center;
-        font-size: 15px;
-        font-weight: 500;
-        margin: auto 10px;
-        margin-bottom: 5px;
-        z-index: 1;
-        position: relative;
-      }
-      #artist {
-        text-align: center;
-        width: 100%;
-        font-size: 14px;
-        margin-bottom: 20px;
-      }
-      #controls {
-        position: relative;
-        height: 42px;
-        margin-bottom: 10px;
-      }
-      #prev, #playpause, #next, #shuffle, #repeat, #add {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        width: 32px;
-        height: 32px;
-        opacity: 0.8;
-        cursor: pointer;
-        display: inline-block;
-        position: absolute;
-        top: 5px;
-      }
-      #prev:hover, #playpause:hover, #next:hover, #shuffle:hover,
-      #repeat:hover, #add:hover {
-        opacity: 1;
-      }
-      #prev {
-        background-image: url('icons/white-skip-to-start-48.png');
-        left: 94px;
-      }
-      #playpause {
-        background-image: url('icons/white-play-48.png');
-        background-size: 28px;
-        background-position-x: 6px;
-        border: 1px solid white;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        top: 2px;
-        left: 131px;
-      }
-      #playpause:hover {
-        border-color: #84bd00;
-      }
-      #playpause.pause {
-        background-image: url('icons/white-pause-48.png');
-        background-position-x: 4px;
-      }
-      #next {
-        background-image: url('icons/white-end-48.png');
-        left: 174px;
-      }
-      #add {
-        left: 5px;
-        top: 6px;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 1px solid transparent;
-        background-image: url('icons/white-add.png');
-      }
-      #add.done {
-        background-image: url('icons/white-check.png');
-        border-color: #84bd00;
-        background-size: 25px;
-      }
-      #add.done:hover {
-        background-image: url('icons/white-clear.png');
-        border-color: #eee;
-      }
-      #shuffle, #repeat {
-        background-size: 20px 20px;
-      }
-      #shuffle {
-        left: 238px;
-        background-image: url('icons/white-shuffle-48.png');
-      }
-      #shuffle.on {
-        background-image: url('icons/84bd00-shuffle-48.png');
-      }
-      #repeat {
-        left: 265px;
-        background-image: url('icons/white-repeat-48.png');
-      }
-      #repeat.on {
-        background-image: url('icons/84bd00-repeat-48.png');
-      }
-
-      #line, #progress {
-        height: 4px;
-        background-color: #3e3e40;
-        border-radius: 3px;
-        margin: 10px;
-      }
-      #progress {
-        background-color: #84bd00;
-        margin: 0px;
-      }
-      #times {
-        font-size: 12px;
-        color: #88898c;
-        height: 14px;
-        margin: 4px 10px;
-      }
-      #current {
-        float: left;
-      }
-      #end {
-        float: right;
-      }
-    </style>
+    <link rel="stylesheet" href="style/style.css">
+    <link id="theme-sheet" rel="stylesheet" href="style/default/theme.css">
   </head>
   <body>
-    <div id="logo"></div>
-    <div id="link"></div>
-    <div id="song">Song name</div>
-    <div id="artist">Artist name</div>
-    <div id="line">
-      <div id="progress" style="width: 0px"></div>
+    <div id="center-block" class="">
+      <div id="artCover" class=""></div>
+      
+      <div id="info" class="">
+        <div>
+          <div id="song">Song name</div>
+          <div id="artist">Artist name</div>
+        </div>
+      </div>
+      
+      <div id="volume-bar" class="">
+        <div id="volume">
+          <div id="volume-progress">
+            <div id="volume-knob" class="knob"></div>
+          </div>
+        </div>
+      </div>
+      
     </div>
-    <div id="times">
-      <div id="current"></div>
-      <div id="end"></div>
+    
+    <div id="bottom-block">
+      <div id="progress-block" class="">
+        <div id="current" class="">00:00</div>
+        <div id="track-progress-bar" class="">
+          <div id="line" class="">
+            <div id="progress">
+              <div id="progress-knob"></div>
+            </div>
+          </div>
+        </div>
+        <div id="end" class="">99:99</div>
+      </div>
+      
+      <div id="controls">
+        <div id="controls-buttons-left">
+          <div id="add"></div>
+        </div>
+        
+        <div id="controls-buttons-center">
+          <div id="prev"></div>
+          <div id="playpause"></div>
+          <div id="next"></div>
+        </div>
+        
+        <div id="controls-buttons-right">
+          <div id="shuffle"></div>
+          <div id="repeat"></div>
+        </div>
+
+      </div>  
     </div>
-    <div id="controls">
-      <div id="prev"></div>
-      <div id="playpause"></div>
-      <div id="next"></div>
-      <div id="shuffle"></div>
-      <div id="repeat"></div>
-      <div id="add"></div>
-    </div>
-  </body>
+    </body>
 </html>

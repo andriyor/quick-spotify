@@ -45,25 +45,44 @@ Quickify.broadcast = function() {
   var trackName = document.querySelector('.track-info .track-info__name a');
   var trackArtist = document.querySelector('.track-info .track-info__artists a');
 
+  var artCoverUrl = document.querySelector("div.now-playing__cover-art .cover-art-image").style.backgroundImage;
+
   var trackCurrentDiv = document.querySelector(".playback-bar__progress-time");
   var trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];  
 
   var shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
   var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
-  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']")
-  var addedButton = document.querySelector("button.control-button[class*='spoticon-added']")
 
+  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
+  var addedButton = document.querySelector("button.control-button[class*='spoticon-heart-active-16']");
+  
   statusMsg.song = trackName.textContent;
   statusMsg.artist = trackArtist.textContent;
-
+  statusMsg.artCoverUrl = artCoverUrl;
+  
   statusMsg.songLength = trackLengthDiv.textContent;
   statusMsg.currentTime = trackCurrentDiv.textContent;
-
+  
   statusMsg.isPlaying = pauseButton ? true : false;
   statusMsg.isSaved = addedButton ? true : false;
   statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
-  statusMsg.isRepeated = repeatButton.classList.contains("control-button--active");
-
+  
+  if(repeatButton.classList.contains("control-button--active")){
+    if(repeatButton.classList.contains("spoticon-repeatonce-16")){
+      statusMsg.repeatMode = "once";
+    } else {
+      statusMsg.repeatMode = "repeat";
+    }
+  } else {
+    statusMsg.repeatMode = 'off';
+  }
+  
+  // Retreive and format the volume value
+  var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
+  var width = volumeProgressBar.getBoundingClientRect().width;
+  var style = window.getComputedStyle(volumeProgressBar);
+  var translate = new WebKitCSSMatrix(style.webkitTransform).m41;
+  statusMsg.currentVolume = 1-Math.abs(((translate/width)));
   browser.runtime.sendMessage(statusMsg);
 };
 
@@ -93,7 +112,7 @@ Quickify.previous = function() {
 
 
 Quickify.save = function() {
-  (document.querySelector("button.control-button[class*='spoticon-add']") || document.querySelector("button.control-button[class*='spoticon-added']")).click();
+  (document.querySelector("button.control-button[class*='spoticon-heart-16']") || document.querySelector("button.control-button[class*='spoticon-heart-active-16']")).click();
 };
 
 
@@ -107,11 +126,31 @@ Quickify.shuffle  = function() {
 };
 
 
+Quickify.changeVolume = function(volume){
+  var progressBar = document.querySelector(".volume-bar").querySelector(".progress-bar");
+  var left = progressBar.getBoundingClientRect().left;
+  var width = progressBar.getBoundingClientRect().width;
+  var clientX = left + volume * width;
+
+  progressBar.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, clientX}));
+  progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));
+};
+
+Quickify.changeTrackProgress = function(progress){
+  var progressBar = document.querySelector(".playback-bar").querySelector(".progress-bar");
+  var left = progressBar.getBoundingClientRect().left;
+  var width = progressBar.getBoundingClientRect().width;
+  var clientX = left + progress * width;
+
+  progressBar.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, clientX}));
+  progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));
+};
+
 Quickify.init = function() {
   // Setup listeners.
   browser.runtime.onMessage.addListener(
       function(request, sender, sendResponse) {
-        switch (request) {
+        switch (request.command) {
           case QuickifyMessages.POPUP_ON:
             Quickify.setIdle(false);
             break;
@@ -135,6 +174,13 @@ Quickify.init = function() {
             break;
           case QuickifyMessages.SHUFFLE:
             Quickify.shuffle();
+            break;
+
+          case QuickifyMessages.CHANGE_VOLUME:
+            Quickify.changeVolume(request.volume);
+            break;
+          case QuickifyMessages.CHANGE_TRACK_PROGRESS:
+            Quickify.changeTrackProgress(request.progress);
             break;
           default:
             Quickify.log("I don't know how to handle this message: " + request);

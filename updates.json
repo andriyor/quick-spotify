@@ -1,0 +1,16 @@
+{
+  "addons" : {
+    "{67c4e734-bb5a-4f95-9b9c-e2e3d346a478}" : {
+      "updates" : [
+        { 
+          "version" : "1.3.7",
+          "update_link": "https://github.com/Alvicc/quick-spotify/releases/download/1.3.7/quickify.xpi"
+        },
+        { 
+          "version" : "1.3.8",
+          "update_link": "https://github.com/Alvicc/quick-spotify/releases/download/1.3.8/quickify.xpi"
+        }
+    ]
+    }
+  }
+}

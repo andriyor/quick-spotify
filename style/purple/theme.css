@@ -1,0 +1,103 @@
+:root {
+  --background : #282828;
+  --background2: #3e3e40;
+  --background3: #d4a8e6;
+  --inactive : #b0c77b;
+  --active : #cdf56f;
+  --song : #fff;
+  --artist : #282828;
+}
+body {
+  background-color: var(--background);
+  color: #dfe0e6;
+}
+
+#center-block {
+  background-color: var(--background3);
+}
+
+#song {
+  color: var(--song);
+}
+#artist {
+  color: var(--artist);
+}
+
+#volume, #volume-progress{
+  background-color: var(--background2);
+}
+
+#volume-progress {
+  background-color: var(--inactive);
+}
+
+#volume-progress.active{
+  background-color: var(--active);
+}
+
+#volume-knob {
+  background-color: #f3f3f3;
+  box-shadow: 1px 1px 3px #000;
+}
+
+#bottom-block {
+  background-color: var(--background);
+}
+
+#prev {
+  background-image: url('skip-to-start-48.png');
+}
+
+#playpause {
+  background-image: url('play-48.png');
+  border: 1px solid white;
+}
+
+#playpause.pause {
+  background-image: url('pause-48.png');
+}
+#next {
+  background-image: url('end-48.png');
+}
+#add {
+  background-image: url('heart-inactive.png');
+}
+#add.done {
+  background-image: url('heart-active.png');
+}
+
+#shuffle {
+  background-image: url('shuffle-inactive-48.png');
+}
+#shuffle.on {
+  background-image: url('shuffle-active-48.png');
+}
+#repeat {
+  background-image: url('repeat-inactive-48.png');
+}
+
+#repeat.repeat {
+  background-image: url('repeat-active-48.png');
+}
+
+#repeat.repeatonce {
+  background-image: url('repeatonce-active-48.png');
+}
+
+
+#line, #progress {
+  background-color: var(--background2);
+}
+
+#progress {
+  background-color: var(--inactive);
+}
+
+#progress.active {
+  background-color: var(--active);
+}
+
+#progress-knob {
+  background-color: #f3f3f3;
+  box-shadow: 1px 1px 3px #000;
+}
