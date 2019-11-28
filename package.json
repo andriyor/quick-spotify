@@ -1,0 +1,25 @@
+{
+  "name": "quick-spotify",
+  "version": "1.0.0",
+  "description": "Chrome Extension with shortcuts for playing songs in Spotify web player",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andriyor/quick-spotify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andriyor/quick-spotify/issues"
+  },
+  "homepage": "https://github.com/andriyor/quick-spotify#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@wext/shipit": "^0.2.1",
+    "web-ext": "^3.2.1"
+  }
+}

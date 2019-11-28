@@ -1,5 +1,5 @@
 window.console.log('this is content, quality content');
-var Quickify = {};
+const Quickify = {};
 
 // Whether we are broadcasting.
 Quickify.isIdle = true;
@@ -48,25 +48,25 @@ Quickify.broadcast = function() {
   var artCoverUrl = document.querySelector("div.now-playing__cover-art .cover-art-image").style.backgroundImage;
 
   var trackCurrentDiv = document.querySelector(".playback-bar__progress-time");
-  var trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];  
+  var trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];
 
   var shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
   var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
 
   var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
   var addedButton = document.querySelector("button.control-button[class*='spoticon-heart-active-16']");
-  
+
   statusMsg.song = trackName.textContent;
   statusMsg.artist = trackArtist.textContent;
   statusMsg.artCoverUrl = artCoverUrl;
-  
+
   statusMsg.songLength = trackLengthDiv.textContent;
   statusMsg.currentTime = trackCurrentDiv.textContent;
-  
+
   statusMsg.isPlaying = pauseButton ? true : false;
   statusMsg.isSaved = addedButton ? true : false;
-  statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");  
-  
+  statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");
+
   if(repeatButton.classList.contains("control-button--active")){
     if(repeatButton.classList.contains("spoticon-repeatonce-16")){
       statusMsg.repeatMode = "once";
@@ -76,7 +76,7 @@ Quickify.broadcast = function() {
   } else {
     statusMsg.repeatMode = 'off';
   }
-  
+
   // Retreive and format the volume value
   var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
   var width = volumeProgressBar.getBoundingClientRect().width;
