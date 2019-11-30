@@ -9,7 +9,7 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.shuffleBtn.classList.toggle('on', request.isShuffled);
   QuickifyPopup.addBtn.classList.toggle('done', request.isSaved);
   QuickifyPopup.artCover.style.backgroundImage = request.artCoverUrl;
-  
+
   var volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
@@ -148,30 +148,30 @@ QuickifyPopup.init = function() {
     QuickifyPopup.volumeProgress.classList.toggle('active', true);
     QuickifyPopup.setVolume(event.clientY);
   });
-  
+
   QuickifyPopup.volumeBar.addEventListener('mouseover', function() {
     QuickifyPopup.volumeKnob.style.visibility = 'visible';
     QuickifyPopup.volumeProgress.classList.toggle('active', true);
   });
-  
+
   QuickifyPopup.volumeBar.addEventListener('mouseleave', function() {
     if(!QuickifyPopup.mouseDownOnVolume){
       QuickifyPopup.volumeKnob.style.visibility = 'hidden';
       QuickifyPopup.volumeProgress.classList.toggle('active', false);
     }
   });
-  
+
   // Track progrress event listener
   QuickifyPopup.trackProgressBar.addEventListener('mousedown', function(event){
     QuickifyPopup.mouseDownOnTrackProgressBar = true;
     QuickifyPopup.sendTrackProgress(event.clientX);
   });
-  
+
   QuickifyPopup.trackProgressBar.addEventListener('mouseover', function() {
     QuickifyPopup.timeProgress.classList.toggle('active', true);
-    QuickifyPopup.trackProgressKnob.style.visibility = 'visible';  
+    QuickifyPopup.trackProgressKnob.style.visibility = 'visible';
   });
-  
+
   QuickifyPopup.trackProgressBar.addEventListener('mouseleave', function() {
     if(!QuickifyPopup.mouseDownOnTrackProgressBar){
       QuickifyPopup.timeProgress.classList.toggle('active', false);
@@ -188,9 +188,9 @@ QuickifyPopup.init = function() {
     QuickifyPopup.timeProgress.classList.toggle('active', false);
     QuickifyPopup.volumeProgress.classList.toggle('active', false);
   });
-  
+
   document.addEventListener('mousemove', function(e){
-    
+
     // Allows to drag the volume and track progress sliders
     if(QuickifyPopup.mouseDownOnVolume){
       QuickifyPopup.setVolume(e.clientY);
@@ -200,9 +200,9 @@ QuickifyPopup.init = function() {
     }
 
   });
-  
+
   // Set up update listener.
-  browser.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
+  chrome.runtime.onMessage.addListener(QuickifyPopup.handleStatus);
 
 
   // Notify content we have started.

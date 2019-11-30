@@ -83,7 +83,7 @@ Quickify.broadcast = function() {
   var style = window.getComputedStyle(volumeProgressBar);
   var translate = new WebKitCSSMatrix(style.webkitTransform).m41;
   statusMsg.currentVolume = 1-Math.abs(((translate/width)));
-  browser.runtime.sendMessage(statusMsg);
+  chrome.runtime.sendMessage(statusMsg);
 };
 
 
@@ -148,7 +148,7 @@ Quickify.changeTrackProgress = function(progress){
 
 Quickify.init = function() {
   // Setup listeners.
-  browser.runtime.onMessage.addListener(
+  chrome.runtime.onMessage.addListener(
       function(request, sender, sendResponse) {
         switch (request.command) {
           case QuickifyMessages.POPUP_ON:
