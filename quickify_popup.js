@@ -2,7 +2,7 @@ window.console.log('This is popping!');
 QuickifyPopup = {};
 
 QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
-  if (request.type != QuickifyMessages.STATUS) return;
+  if (request.type !== QuickifyMessages.STATUS) return;
   QuickifyPopup.song.textContent = request.song;
   QuickifyPopup.artist.textContent = request.artist;
   QuickifyPopup.playpauseBtn.classList.toggle('pause', request.isPlaying);
@@ -10,7 +10,7 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   QuickifyPopup.addBtn.classList.toggle('done', request.isSaved);
   QuickifyPopup.artCover.style.backgroundImage = request.artCoverUrl;
 
-  var volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
+  const volumeSize = QuickifyPopup.volumeBar.getBoundingClientRect().height;
   QuickifyPopup.volumeProgress.style.transform = "translateY(" + (volumeSize - (request.currentVolume * volumeSize)) + "px)";
   QuickifyPopup.volumeProgress.style.height = (request.currentVolume * volumeSize);
 
@@ -30,8 +30,8 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
   }
 
   // Calculate and display time differently for normal and beta players.
-  var percent = 0;
-  var cTime = parseTime(request.currentTime);
+  let percent = 0;
+  const cTime = parseTime(request.currentTime);
   if (request.songLength) {
     percent = cTime / parseTime(request.songLength);
   } else if (request.remainingTime) {
@@ -44,21 +44,21 @@ QuickifyPopup.handleStatus = function(request, sender, sendResponse) {
 
   // Parse time to set progress accordingly.
   function parseTime(time) {
-    var tArr = time.split(':');
-    var secs = 0;
-    var mult = 1;
-    for (var i = tArr.length - 1; i >=0; i--) {
+    const tArr = time.split(':');
+    let secs = 0;
+    let mult = 1;
+    for (let i = tArr.length - 1; i >=0; i--) {
       secs += Number(tArr[i]) * mult;
       mult *= 60;
     }
     return secs;
-  };
+  }
 };
 
 QuickifyPopup.setTime = function(currentTime, songLength, percent) {
   QuickifyPopup.currentTime.textContent = currentTime;
   QuickifyPopup.songLength.textContent = songLength;
-  var newWidth = percent * QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
+  const newWidth = percent * QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
   QuickifyPopup.timeProgress.style.width = Math.round(newWidth) + 'px';
   QuickifyPopup.trackProgressKnob.style.transform = "translateX(" + newWidth + "px)";
 };
@@ -66,17 +66,17 @@ QuickifyPopup.setTime = function(currentTime, songLength, percent) {
 
 // Change the volume from te mouse position over the volume bar
 QuickifyPopup.setVolume = function(mouseY) {
-  var bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
-  var height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
-  var volume = (bottom - mouseY) / height;
+  const bottom = QuickifyPopup.volumeBar.getBoundingClientRect().bottom;
+  const height = QuickifyPopup.volumeBar.getBoundingClientRect().height;
+  const volume = (bottom - mouseY) / height;
   QuickifySendToContent({'command' : QuickifyMessages.CHANGE_VOLUME, 'volume' : volume});
 };
 
 // Change the track progress from te mouse position over the track progress bar
 QuickifyPopup.sendTrackProgress = function(mouseX){
-  var left = QuickifyPopup.trackProgressBar.getBoundingClientRect().left;
-  var width = QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
-  var progress = (mouseX - left) / width;
+  const left = QuickifyPopup.trackProgressBar.getBoundingClientRect().left;
+  const width = QuickifyPopup.trackProgressBar.getBoundingClientRect().width;
+  const progress = (mouseX - left) / width;
   console.log("Set progress : " + progress);
   QuickifySendToContent({'command' : QuickifyMessages.CHANGE_TRACK_PROGRESS, 'progress' : progress});
 };
@@ -161,7 +161,7 @@ QuickifyPopup.init = function() {
     }
   });
 
-  // Track progrress event listener
+  // Track progress event listener
   QuickifyPopup.trackProgressBar.addEventListener('mousedown', function(event){
     QuickifyPopup.mouseDownOnTrackProgressBar = true;
     QuickifyPopup.sendTrackProgress(event.clientX);

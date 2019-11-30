@@ -15,7 +15,7 @@ Quickify.interval = 400;
 
 
 Quickify.setIdle = function(idle) {
-  if (idle == Quickify.isIdle) return;
+  if (idle === Quickify.isIdle) return;
   Quickify.log('Set idle to ' + idle);
   Quickify.isIdle = idle;
   if (idle) {
@@ -39,22 +39,22 @@ Quickify.broadcast = function() {
     Quickify.setIdle(true);
     return;
   }
-  var statusMsg = {};
+  const statusMsg = {};
   statusMsg.type = QuickifyMessages.STATUS;
 
-  var trackName = document.querySelector('.track-info .track-info__name a');
-  var trackArtist = document.querySelector('.track-info .track-info__artists a');
+  const trackName = document.querySelector('.track-info .track-info__name a');
+  const trackArtist = document.querySelector('.track-info .track-info__artists a');
 
-  var artCoverUrl = document.querySelector("div.now-playing__cover-art .cover-art-image").style.backgroundImage;
+  const artCoverUrl = document.querySelector("div.now-playing__cover-art .cover-art-image").style.backgroundImage;
 
-  var trackCurrentDiv = document.querySelector(".playback-bar__progress-time");
-  var trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];
+  const trackCurrentDiv = document.querySelector(".playback-bar__progress-time");
+  const trackLengthDiv = document.querySelectorAll(".playback-bar__progress-time")[1];
 
-  var shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
-  var repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
+  const shuffleButton = document.querySelector("button.control-button[class*='spoticon-shuffle']");
+  const repeatButton = document.querySelector("button.control-button[class*='spoticon-repeat']");
 
-  var pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
-  var addedButton = document.querySelector("button.control-button[class*='spoticon-heart-active-16']");
+  const pauseButton = document.querySelector("button.control-button[class*='spoticon-pause']");
+  const addedButton = document.querySelector("button.control-button[class*='spoticon-heart-active-16']");
 
   statusMsg.song = trackName.textContent;
   statusMsg.artist = trackArtist.textContent;
@@ -63,8 +63,8 @@ Quickify.broadcast = function() {
   statusMsg.songLength = trackLengthDiv.textContent;
   statusMsg.currentTime = trackCurrentDiv.textContent;
 
-  statusMsg.isPlaying = pauseButton ? true : false;
-  statusMsg.isSaved = addedButton ? true : false;
+  statusMsg.isPlaying = !!pauseButton;
+  statusMsg.isSaved = !!addedButton;
   statusMsg.isShuffled = shuffleButton.classList.contains("control-button--active");
 
   if(repeatButton.classList.contains("control-button--active")){
@@ -77,11 +77,11 @@ Quickify.broadcast = function() {
     statusMsg.repeatMode = 'off';
   }
 
-  // Retreive and format the volume value
-  var volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
-  var width = volumeProgressBar.getBoundingClientRect().width;
-  var style = window.getComputedStyle(volumeProgressBar);
-  var translate = new WebKitCSSMatrix(style.webkitTransform).m41;
+  // Retrieve and format the volume value
+  const volumeProgressBar = document.querySelector(".volume-bar").querySelector(".progress-bar__fg");
+  const width = volumeProgressBar.getBoundingClientRect().width;
+  const style = window.getComputedStyle(volumeProgressBar);
+  const translate = new WebKitCSSMatrix(style.webkitTransform).m41;
   statusMsg.currentVolume = 1-Math.abs(((translate/width)));
   chrome.runtime.sendMessage(statusMsg);
 };
@@ -127,20 +127,20 @@ Quickify.shuffle  = function() {
 
 
 Quickify.changeVolume = function(volume){
-  var progressBar = document.querySelector(".volume-bar").querySelector(".progress-bar");
-  var left = progressBar.getBoundingClientRect().left;
-  var width = progressBar.getBoundingClientRect().width;
-  var clientX = left + volume * width;
+  const progressBar = document.querySelector(".volume-bar").querySelector(".progress-bar");
+  const left = progressBar.getBoundingClientRect().left;
+  const width = progressBar.getBoundingClientRect().width;
+  const clientX = left + volume * width;
 
   progressBar.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, clientX}));
   progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));
 };
 
 Quickify.changeTrackProgress = function(progress){
-  var progressBar = document.querySelector(".playback-bar").querySelector(".progress-bar");
-  var left = progressBar.getBoundingClientRect().left;
-  var width = progressBar.getBoundingClientRect().width;
-  var clientX = left + progress * width;
+  const progressBar = document.querySelector(".playback-bar").querySelector(".progress-bar");
+  const left = progressBar.getBoundingClientRect().left;
+  const width = progressBar.getBoundingClientRect().width;
+  const clientX = left + progress * width;
 
   progressBar.dispatchEvent(new MouseEvent('mousedown', {bubbles:true, clientX}));
   progressBar.dispatchEvent(new MouseEvent('mouseup', {bubbles:true, clientX}));

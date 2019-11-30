@@ -6,12 +6,12 @@ chrome.runtime.onInstalled.addListener(function(details) {
       // Refresh spotify tabs.
       for (var i = 0; i < tabs.length; i++) {
         chrome.tabs.reload(tabs[i].id);
-      };
+      }
     });
 });
 // This page is only needed for the browser.commands.
 chrome.commands.onCommand.addListener(function(command) {
-  var msg = '';
+  let msg = '';
   switch (command) {
     case 'play-pause':
       msg = QuickifyMessages.PLAY_OR_PAUSE;
