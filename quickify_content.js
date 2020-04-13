@@ -42,8 +42,8 @@ Quickify.broadcast = function() {
   const statusMsg = {};
   statusMsg.type = QuickifyMessages.STATUS;
 
-  const trackName = document.querySelector('.track-info .track-info__name a');
-  const trackArtist = document.querySelector('.track-info .track-info__artists a');
+  const trackName = document.querySelector('.Root__now-playing-bar [dir="auto"]:first-child a');
+  const trackArtist = document.querySelector('.Root__now-playing-bar [dir="auto"]:last-child a');
 
   const artCoverUrl = document.querySelector("div.now-playing__cover-art .cover-art-image").style.backgroundImage;
 
